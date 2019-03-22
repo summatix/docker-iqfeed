@@ -93,27 +93,11 @@ RUN git clone https://github.com/akapur/pyiqfeed.git && \
     git checkout ec98776b157857a8c141c4d452245282c5ede764 && \
     python3 setup.py install && \
     cd .. && rm -rf pyiqfeed
-	
-ADD launch_iqfeed.py /home/wine/launch_iqfeed.py
-ADD pyiqfeed_admin_conn.py /home/wine/pyiqfeed_admin_conn.py
-ADD is_iqfeed_running.py /home/wine/is_iqfeed_running.py
-
-# Add iqfeed proxy app
-ADD app /home/wine/app
-ADD iqfeed_startup.sh /home/wine/iqfeed_startup.sh
-
-RUN \
-	usermod -aG sudo wine && \
-	echo "%sudo ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers && \
-	chmod +x /home/wine/iqfeed_startup.sh && \
-	chown -R wine:wine /home/wine/*.*
 
 # Add supervisor conf
 ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-#USER wine
-
 CMD ["/usr/bin/supervisord"]
-#CMD ["/home/wine/iqfeed_startup.sh"]
+
 # Expose Ports
 EXPOSE 9101
 EXPOSE 5010
