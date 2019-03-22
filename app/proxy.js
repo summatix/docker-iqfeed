@@ -13,10 +13,10 @@ var portMap = {
 };
 
 var config = {
-	appName: process.env.APP_NAME || "MATLAB_1694",
-	appVersion: process.env.APP_VERSION || "1.0",
-	login: process.env.IQFEED_LOGIN,
-	password: process.env.IQFEED_PASSWORD
+	appName: process.env.APP_NAME || "IQFEED_DEMO",
+	appVersion: process.env.APP_VERSION || "1.0.0.0",
+	login: process.env.LOGIN,
+	password: process.env.PASSWORD
 };
 
 Object.keys(portMap).forEach(function(port) {
@@ -25,11 +25,10 @@ Object.keys(portMap).forEach(function(port) {
 		var connected = false;
 		var connection = net.createConnection(port);
 		socket.on('close', function() {
-			//console.log("socket closed");
 			connection.destroy();
 		});
 		socket.on('error', function(err) {
-			console.error('socket error', err);
+			console.error(err);
 		});
 		socket.on('data', function(data) {
 			if (connected) {
@@ -39,12 +38,11 @@ Object.keys(portMap).forEach(function(port) {
 			}
 		});
 		connection.on('connect', function() {
-			//console.log("connection on");			
 			connected = true;
 			connection.write(beforeConnectedBuffer);
 		});
 		connection.on('error', function(err) {
-			console.error('connection error', err);
+			console.error(err);
 			connection.unpipe(socket);
 			connection.destroy();
 			socket.end();
@@ -56,7 +54,6 @@ Object.keys(portMap).forEach(function(port) {
 /*
 We need to connect IQFeed to servers by passing 'connect' command to it.
 */
-/*
 function startIqFeed() {
 	var port = 9300; // IQFeed admin port
 
@@ -64,12 +61,10 @@ function startIqFeed() {
 
 	var socket = net.createConnection(port);
 	socket.on('error', function(err) {
-		console.log("Error.. ", err);
-		
 	});
 	socket.on('close', function() {
-		console.log("Disconnected. Reconnecting in 15 second.");
-		setTimeout(startIqFeed, 15000);
+		console.log("Disconnected. Reconnecting in 1 second.");
+		setTimeout(startIqFeed, 1000);
 	});
 	socket.on('connect', function() {
 		console.log("Connected.");
@@ -85,9 +80,7 @@ function startIqFeed() {
                     console.log("Sending 'connect' command.");
                     socket.write("S,CONNECT\r\n");
                 }
-		//console.log(data.toString ? data.toString().replace(/[\r\n]+/, '') : data);
+		console.log(data.toString ? data.toString().replace(/[\r\n]+/, '') : data);
 	});
 }
-
 startIqFeed();
-*/
