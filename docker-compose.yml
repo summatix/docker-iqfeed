@@ -8,3 +8,9 @@ services:
       - IQFEED_PRODUCT_ID=$IQFEED_PRODUCT_ID
       - IQFEED_LOGIN=$IQFEED_LOGIN
       - IQFEED_PASSWORD=$IQFEED_PASSWORD
+    ports:
+      - "5009:5010"
+      - "9100:9101"
+      - "9200:9201"
+      - "9300:9301"
+      - "9400:9401"
