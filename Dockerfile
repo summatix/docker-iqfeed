@@ -83,6 +83,10 @@ RUN \
 	rm -rf /home/wine/.cache && \
 	rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
+# Set up tini
+COPY --from=tiemensch/tiniconda:ubuntu-bionic /usr/local/bin/tini /usr/local/bin/tini
+ENTRYPOINT ["/usr/local/bin/tini", "--"]
+
 # Add pyiqfeed 
 RUN git clone https://github.com/jaikumarm/pyiqfeed.git && \
     cd pyiqfeed && \
