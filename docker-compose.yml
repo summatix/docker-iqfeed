@@ -5,6 +5,6 @@ services:
       context: .
       dockerfile: Dockerfile
     environment:
-      IQFEED_PRODUCT_ID: "CHANGEME"
-      IQFEED_LOGIN: "CHANGEME"
-      IQFEED_PASSWORD: "CHANGEME"
+      - IQFEED_PRODUCT_ID=$IQFEED_PRODUCT_ID
+      - IQFEED_LOGIN=$IQFEED_LOGIN
+      - IQFEED_PASSWORD=$IQFEED_PASSWORD
