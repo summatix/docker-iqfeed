@@ -90,6 +90,7 @@ ENTRYPOINT ["/usr/local/bin/tini", "--"]
 # Add pyiqfeed 
 RUN git clone https://github.com/jaikumarm/pyiqfeed.git && \
     cd pyiqfeed && \
+    git checkout a96f541df46e5776fccc959602f69e7f97216e16 && \
     python3 setup.py install && \
     cd .. && rm -rf pyiqfeed
 	
