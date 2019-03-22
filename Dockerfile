@@ -94,8 +94,8 @@ RUN git clone https://github.com/akapur/pyiqfeed.git && \
     python3 setup.py install && \
     cd .. && rm -rf pyiqfeed
 
-# Set up proxy
-COPY app/proxy.js /home/wine/app/proxy.js
+# Copy over source code
+COPY app /home/wine/app
 
 # Add supervisor conf
 ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf
