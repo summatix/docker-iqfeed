@@ -14,3 +14,10 @@ services:
       - "9200:9201"
       - "9300:9301"
       - "9400:9401"
+
+  tests:
+    build:
+      context: .
+      dockerfile: containers/tests/Dockerfile
+    environment:
+      - IQFEED_HOST=docker.for.mac.localhost
