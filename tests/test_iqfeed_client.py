@@ -1,4 +1,5 @@
 import datetime
+import os
 import pkgutil
 import time
 
@@ -7,10 +8,10 @@ import pyiqfeed.service
 import pytest
 
 
-@pytest.fixture(scope="session")
-@pytest.mark.timeout(300)
+@pytest.fixture(scope="session", autouse=True)
+@pytest.mark.timeout(60)
 def wait_for_iqfeed():
-    while not pyiqfeed.service._is_iqfeed_running():
+    while not pyiqfeed.service._is_iqfeed_running(os.environ["IQFEED_HOST"]):
         time.sleep(1)
 
 
