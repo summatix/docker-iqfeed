@@ -3,7 +3,7 @@ services:
   iqfeed:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: containers/iqfeed/Dockerfile
     environment:
       - IQFEED_PRODUCT_ID=$IQFEED_PRODUCT_ID
       - IQFEED_LOGIN=$IQFEED_LOGIN
